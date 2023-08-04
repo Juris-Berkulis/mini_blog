@@ -35,7 +35,6 @@ const submit = (): void => {
       smallDescription: smallDescription.value,
       longDescription: longDescription.value,
       date: getDate(currentDate),
-      commentsList: [],
   };
 
   addNewPost(newPost);

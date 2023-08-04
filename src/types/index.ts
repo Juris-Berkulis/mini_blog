@@ -1,15 +1,22 @@
-interface CommentsList {
-    id: number,
-    authorName: string,
-    authorEmail: string,
-    text: string,
-};
-
 export interface PostItem {
     id: number,
     title: string,
     smallDescription: string,
     longDescription: string,
     date: string,
-    commentsList: Array<CommentsList>,
+};
+
+export interface PropsObject {
+    [key: string]: PostItem,
+};
+
+export interface Comment {
+    id: number,
+    authorName: string,
+    authorEmail: string,
+    text: string,
+};
+
+export interface CommentsObject {
+    [key: string]: Array<Comment>,
 };

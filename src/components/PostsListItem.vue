@@ -2,6 +2,7 @@
 import type { PostItem } from '@/types';
 import { converteDate, getDate } from '@/helpers/index';
 import { usePostsStore } from '@/stores/posts';
+import { useCommentsStore } from '@/stores/comments';
 import { ref, type Ref } from 'vue';
 import PostForm from './PostForm.vue';
 
@@ -14,6 +15,10 @@ const props = defineProps<Props>();
 const {
     editPost,
 } = usePostsStore();
+
+const {
+    getCommentsCountForPost,
+} = useCommentsStore();
 
 const isEdit: Ref<boolean> = ref(false);
 
@@ -46,7 +51,6 @@ const changePost = () => {
         smallDescription: smallDescription.value,
         longDescription: longDescription.value,
         date: getDate(currentDate),
-        commentsList: props.post.commentsList,
     };
 
     editPost(changedPost);
@@ -73,10 +77,11 @@ const changePost = () => {
         <div>
             <p>
                 <span>Комментарии:</span>
-                <span>{{ post.commentsList.length }}</span>
+                <span>{{ getCommentsCountForPost(post.id) }}</span>
             </p>
             <p>{{ converteDate(post.date) }}</p>
         </div>
+        <RouterLink :to="`/post/${post.id}`">Открыть пост</RouterLink>
     </div>
 </div>
 </template>

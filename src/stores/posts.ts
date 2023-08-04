@@ -1,21 +1,24 @@
-import { ref, type Ref } from 'vue';
+import { computed, reactive, type ComputedRef } from 'vue';
 import { defineStore } from 'pinia';
-import { type PostItem } from '@/types';
+import { type PostItem, type PropsObject } from '@/types';
 
 export const usePostsStore = defineStore('posts', () => {
-    const postsList: Ref<PostItem[]> = ref([]);
+    const postObject: PropsObject = reactive({});
+
+    const postsList: ComputedRef<PostItem[]> = computed(() => {
+        return Object.values(postObject)
+    });
 
     const addNewPost = (post: PostItem): void => {
-        postsList.value.push(post);
+        postObject[post.id] = post;
     };
 
     const editPost = (editedPost: PostItem): void => {
-        const editedPostIndex = postsList.value.findIndex((post) => post.id === editedPost.id);
-
-        postsList.value.splice(editedPostIndex, 1, editedPost);
+        postObject[editedPost.id] = editedPost;
     };
 
     return {
+        postObject,
         postsList, 
         addNewPost,
         editPost,
