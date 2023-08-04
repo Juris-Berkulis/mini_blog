@@ -11,7 +11,7 @@ export interface PropsObject {
 };
 
 export interface Comment {
-    id: number,
+    id: string,
     authorName: string,
     authorEmail: string,
     text: string,

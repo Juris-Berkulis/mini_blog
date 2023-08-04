@@ -1,17 +1,43 @@
 <script setup lang="ts">
+import { useCommentsStore } from '@/stores/comments';
+import type { Comment } from '@/types';
 import { ref, type Ref } from 'vue';
+
+interface Props {
+    postId: number,
+};
+
+const props = defineProps<Props>();
+
+const {
+    addCommentIntoPost,
+} = useCommentsStore();
 
 const authorName: Ref<string> = ref('');
 const authorEmail: Ref<string> = ref('');
 const text: Ref<string> = ref('');
 
-const submit = (): void => {
+    const resetForm = (): void => {
+    authorName.value = '';
+    authorEmail.value = '';
+    text.value = '';
+};
 
+const submit = (): void => {
+    const comment: Comment = {
+        id: `comment-${Date.now()}`,
+        authorName: authorName.value,
+        authorEmail: authorEmail.value,
+        text: text.value,
+    };
+
+    addCommentIntoPost(props.postId, comment);
+    resetForm();
 };
 </script>
 
 <template>
-<form @submit="submit" action="">
+<form @submit.prevent="submit" action="">
     <label for=""></label>
     <input v-model="authorName" type="text" name="" id="">
     <label for=""></label>

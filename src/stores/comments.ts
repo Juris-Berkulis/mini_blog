@@ -10,12 +10,22 @@ export const useCommentsStore = defineStore('comments', () => {
     };
 
     const getCommentsCountForPost = (postId: number): number => {
-        return commentsObject[postId]?.length || 0
+        return commentsObject[postId].length
+    };
+
+    const addEmptyCommentIntoNewPost = (postId: number): void => {
+        commentsObject[postId] = [];
+    };
+
+    const addCommentIntoPost = (postId: number, comment: Comment): void => {
+        commentsObject[postId].push(comment);
     };
 
     return {
         commentsObject,
         getCommentsForOpenedPost,
         getCommentsCountForPost,
+        addEmptyCommentIntoNewPost,
+        addCommentIntoPost,
     }
 });
