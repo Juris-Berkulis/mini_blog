@@ -9,8 +9,15 @@ export const usePostsStore = defineStore('posts', () => {
         postsList.value.push(post);
     };
 
+    const editPost = (editedPost: PostItem): void => {
+        const editedPostIndex = postsList.value.findIndex((post) => post.id === editedPost.id);
+
+        postsList.value.splice(editedPostIndex, 1, editedPost);
+    };
+
     return {
         postsList, 
         addNewPost,
+        editPost,
     }
 });

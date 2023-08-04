@@ -37,7 +37,7 @@ const submit = (): void => {
     <textarea v-model="inputtedSmallDescription" @change.lazy="() => setSmallDescription(inputtedSmallDescription)" name="" id="" cols="30" rows="10"></textarea>
     <label for="">Полное описание</label>
     <textarea v-model="inputtedLongDescription" @change.lazy="() => setLongDescription(inputtedLongDescription)" name="" id="" cols="30" rows="10"></textarea>
-    <button type="submit">Опубликовать</button>
+    <button type="submit">Сохранить</button>
 </form>
 </template>
 

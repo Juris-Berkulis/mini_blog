@@ -7,7 +7,7 @@ import { usePostsStore } from '@/stores/posts';
 import { getDate } from '@/helpers/index';
 
 const {
-    addNewPost,
+  addNewPost,
 } = usePostsStore();
 
 const title: Ref<string> = ref('');
