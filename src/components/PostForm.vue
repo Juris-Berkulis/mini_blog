@@ -1,36 +1,30 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue';
-import { type PostItem } from '@/types';
-import { usePostsStore } from '@/stores/posts';
-import { getDate } from '@/helpers/index';
 
-const {
-    addNewPost,
-} = usePostsStore();
+interface Props {
+    title: string,
+    smallDescription: string,
+    longDescription: string,
+    setTitle: (newValue: string) => void,
+    setSmallDescription: (newValue: string) => void,
+    setLongDescription: (newValue: string) => void,
+    doIt: () => void,
+};
 
-const title: Ref<string> = ref('');
-const smallDescription: Ref<string> = ref('');
-const longDescription: Ref<string> = ref('');
+const props = defineProps<Props>();
+
+const inputtedTitle: Ref<string> = ref(props.title);
+const inputtedSmallDescription: Ref<string> = ref(props.smallDescription);
+const inputtedLongDescription: Ref<string> = ref(props.longDescription);
 
 const resetForm = (): void => {
-    title.value = '';
-    smallDescription.value = '';
-    longDescription.value = '';
+    inputtedTitle.value = '';
+    inputtedSmallDescription.value = '';
+    inputtedLongDescription.value = '';
 };
 
 const submit = (): void => {
-    const currentDate: number = Date.now();
-
-    const newPost: PostItem = {
-        id: currentDate,
-        title: title.value,
-        smallDescription: smallDescription.value,
-        longDescription: longDescription.value,
-        date: getDate(currentDate),
-        commentsList: [],
-    };
-
-    addNewPost(newPost);
+    props.doIt();
     resetForm();
 };
 </script>
@@ -38,11 +32,11 @@ const submit = (): void => {
 <template>
 <form @submit.prevent="submit" action="">
     <label for="">Заголовок</label>
-    <input v-model="title" type="text" name="" id="">
+    <input v-model="inputtedTitle" @change.lazy="() => setTitle(inputtedTitle)" type="text" name="" id="">
     <label for="">Краткое описание</label>
-    <textarea v-model="smallDescription" name="" id="" cols="30" rows="10"></textarea>
+    <textarea v-model="inputtedSmallDescription" @change.lazy="() => setSmallDescription(inputtedSmallDescription)" name="" id="" cols="30" rows="10"></textarea>
     <label for="">Полное описание</label>
-    <textarea v-model="longDescription" name="" id="" cols="30" rows="10"></textarea>
+    <textarea v-model="inputtedLongDescription" @change.lazy="() => setLongDescription(inputtedLongDescription)" name="" id="" cols="30" rows="10"></textarea>
     <button type="submit">Опубликовать</button>
 </form>
 </template>
