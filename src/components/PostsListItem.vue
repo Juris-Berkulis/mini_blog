@@ -14,6 +14,7 @@ const props = defineProps<Props>();
 
 const {
     editPost,
+    deletePost,
 } = usePostsStore();
 
 const {
@@ -60,7 +61,10 @@ const changePost = () => {
 
 <template>
 <div>
-    <button @click="toggleIsEdit">{{ isEdit ? 'Показать' : 'Редактировать' }}</button>
+    <div>
+        <button @click="toggleIsEdit">{{ isEdit ? 'Показать' : 'Редактировать' }}</button>
+        <button @click="() => deletePost(post.id)">Удалить</button>
+    </div>
     <PostForm 
         v-if="isEdit"
         :title="title"

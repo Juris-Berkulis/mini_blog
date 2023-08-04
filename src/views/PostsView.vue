@@ -4,16 +4,11 @@ import PostsList from '@/components/PostsList.vue';
 import { ref, type Ref } from 'vue';
 import { type PostItem } from '@/types';
 import { usePostsStore } from '@/stores/posts';
-import { useCommentsStore } from '@/stores/comments';
 import { getDate } from '@/helpers/index';
 
 const {
   addNewPost,
 } = usePostsStore();
-
-const {
-  addEmptyCommentIntoNewPost,
-} = useCommentsStore();
 
 const title: Ref<string> = ref('');
 const smallDescription: Ref<string> = ref('');
@@ -43,7 +38,6 @@ const submit = (): void => {
   };
 
   addNewPost(newPost);
-  addEmptyCommentIntoNewPost(newPost.id);
 };
 </script>
 

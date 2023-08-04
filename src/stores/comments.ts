@@ -21,11 +21,16 @@ export const useCommentsStore = defineStore('comments', () => {
         commentsObject[postId].push(comment);
     };
 
+    const deleteComments = (postId: string): void => {
+        delete commentsObject[postId];
+    };
+
     return {
         commentsObject,
         getCommentsForOpenedPost,
         getCommentsCountForPost,
         addEmptyCommentIntoNewPost,
         addCommentIntoPost,
+        deleteComments,
     }
 });
