@@ -6,7 +6,7 @@ import CommentForm from '@/components/CommentForm.vue';
 import CommentsList from '@/components/CommentsList.vue';
 
 interface Props {
-    id: string,
+    postId: string,
 };
 
 const props = defineProps<Props>();
@@ -15,7 +15,7 @@ const {
     postObject,
 } = usePostsStore();
 
-const openedPost: PostItem | undefined = postObject[props.id];
+const openedPost: PostItem | undefined = postObject[props.postId];
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const openedPost: PostItem | undefined = postObject[props.id];
 </div>
 <div v-else>
     <h1>404</h1>
-    <p>Пост не найден</p>
+    <p>Статья не найдена</p>
     <RouterLink to="/">Вернуться на главную</RouterLink>
 </div>
 </template>

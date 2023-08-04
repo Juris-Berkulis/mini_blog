@@ -10,10 +10,15 @@ const router = createRouter({
       component: PostsView,
     },
     {
-      path: '/post/:id',
+      path: '/:postId',
       name: 'openedPost',
       component: () => import('../views/PostOpenedView.vue'),
       props: true,
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'pageNotFound',
+      component: () => import('../views/PageNotFoundView.vue'),
     },
   ]
 });

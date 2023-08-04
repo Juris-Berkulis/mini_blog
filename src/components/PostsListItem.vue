@@ -81,7 +81,7 @@ const changePost = () => {
             </p>
             <p>{{ converteDate(post.date) }}</p>
         </div>
-        <RouterLink :to="`/post/${post.id}`">Открыть пост</RouterLink>
+        <RouterLink :to="`/${post.id}`">Открыть пост</RouterLink>
     </div>
 </div>
 </template>
