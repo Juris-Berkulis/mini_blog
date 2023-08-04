@@ -6,5 +6,5 @@ import PostsList from '@/components/PostsList.vue';
   <PostsList />
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 </style>
