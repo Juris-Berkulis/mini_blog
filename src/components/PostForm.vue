@@ -2,6 +2,7 @@
 import { ref, type Ref } from 'vue';
 import { type PostItem } from '@/types';
 import { usePostsStore } from '@/stores/posts';
+import { getDate } from '@/helpers/index';
 
 const {
     addNewPost,
@@ -15,19 +16,6 @@ const resetForm = (): void => {
     title.value = '';
     smallDescription.value = '';
     longDescription.value = '';
-};
-
-const addZeroToBeginingOfNumber = (num: number): string => {
-    return num < 10 ? `0${num}` : `${num}`
-};
-
-const getDate = (dateInMilliseconds: number): string => {
-    const date: Date = new Date(dateInMilliseconds);
-    const utcYear: number = date.getUTCFullYear();
-    const utcMonth: number = date.getUTCMonth() + 1;
-    const utcDayNumber: number = date.getUTCDate();
-
-    return `${utcYear}-${addZeroToBeginingOfNumber(utcMonth)}-${addZeroToBeginingOfNumber(utcDayNumber)}`
 };
 
 const submit = (): void => {

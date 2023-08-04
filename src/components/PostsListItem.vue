@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import type { PostItem } from '@/types';
+import { converteDate } from '@/helpers/index';
 
 interface Props {
     post: PostItem,
 };
 
 defineProps<Props>();
-
-const converteDate = (oldDateFormat: string): string => {
-    return oldDateFormat.split('-').reverse().join('.')
-};
 </script>
 
 <template>
