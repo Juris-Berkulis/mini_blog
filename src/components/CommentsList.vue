@@ -3,7 +3,7 @@ import { useCommentsStore } from '@/stores/comments';
 import CommentsListItem from '@/components/CommentsListItem.vue';
 
 interface Props {
-    postId: number,
+    postId: string,
 };
 
 const props = defineProps<Props>();

@@ -4,7 +4,7 @@ import type { Comment } from '@/types';
 import { ref, type Ref } from 'vue';
 
 interface Props {
-    postId: number,
+    postId: string,
 };
 
 const props = defineProps<Props>();

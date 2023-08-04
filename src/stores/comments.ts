@@ -5,19 +5,19 @@ import { reactive } from 'vue';
 export const useCommentsStore = defineStore('comments', () => {
     const commentsObject: CommentsObject = reactive({});
 
-    const getCommentsForOpenedPost = (openedPostId: number): Array<Comment> => {
+    const getCommentsForOpenedPost = (openedPostId: string): Array<Comment> => {
         return commentsObject[openedPostId]
     };
 
-    const getCommentsCountForPost = (postId: number): number => {
+    const getCommentsCountForPost = (postId: string): number => {
         return commentsObject[postId].length
     };
 
-    const addEmptyCommentIntoNewPost = (postId: number): void => {
+    const addEmptyCommentIntoNewPost = (postId: string): void => {
         commentsObject[postId] = [];
     };
 
-    const addCommentIntoPost = (postId: number, comment: Comment): void => {
+    const addCommentIntoPost = (postId: string, comment: Comment): void => {
         commentsObject[postId].push(comment);
     };
 

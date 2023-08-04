@@ -35,7 +35,7 @@ const submit = (): void => {
   const currentDate: number = Date.now();
 
   const newPost: PostItem = {
-      id: currentDate,
+      id: `post-${currentDate}`,
       title: title.value,
       smallDescription: smallDescription.value,
       longDescription: longDescription.value,
