@@ -18,19 +18,19 @@ const overallValues = {
     maxSizeForTitle: 50,
     maxSizeForSmallDescription: 100,
     maxSizeForLongDescription: 255,
-    defaultError: '_',
 };
 
 const inputtedTitle: Ref<string> = ref(props.title);
 const inputtedSmallDescription: Ref<string> = ref(props.smallDescription);
 const inputtedLongDescription: Ref<string> = ref(props.longDescription);
 
-const errorInInputtedTitle: Ref<string> = ref(overallValues.defaultError);
-const errorInInputtedSmallDescription: Ref<string> = ref(overallValues.defaultError);
-const errorInInputtedLongDescription: Ref<string> = ref(overallValues.defaultError);
+const errorInInputtedTitle: Ref<string> = ref('');
+const errorInInputtedSmallDescription: Ref<string> = ref('');
+const errorInInputtedLongDescription: Ref<string> = ref('');
 
 const errorInForm = computed(() => {
-    return errorInInputtedTitle.value || errorInInputtedSmallDescription.value || errorInInputtedLongDescription.value
+    return errorInInputtedTitle.value || errorInInputtedSmallDescription.value || errorInInputtedLongDescription.value 
+    || !inputtedTitle.value || !inputtedSmallDescription.value
 });
 
 const resetForm = (): void => {
@@ -87,13 +87,13 @@ const changeInputValue = (inputName: InputName): void => {
 <form class="form" @submit.prevent="submit" action="">
     <label class="label" :for="`${postId}inputtedTitle`">Заголовок</label>
     <input class="input" v-model.trim="inputtedTitle" @input="() => changeInputValue('title')" type="text" :id="`${postId}inputtedTitle`" placeholder="Заголовок">
-    <p v-if="errorInInputtedTitle !== overallValues.defaultError" class="error">{{ errorInInputtedTitle }}</p>
+    <p class="error">{{ errorInInputtedTitle }}</p>
     <label class="label" :for="`${postId}inputtedSmallDescription`">Краткое описание</label>
     <textarea class="textarea" v-model.trim="inputtedSmallDescription" @input="() => changeInputValue('smallDescription')" :id="`${postId}inputtedSmallDescription`" placeholder="Краткое описание"></textarea>
-    <p v-if="errorInInputtedSmallDescription !== overallValues.defaultError" class="error">{{errorInInputtedSmallDescription}}</p>
+    <p class="error">{{errorInInputtedSmallDescription}}</p>
     <label class="label" :for="`${postId}inputtedLongDescription`">Полное описание</label>
     <textarea class="textarea" v-model.trim="inputtedLongDescription" @input="() => changeInputValue('longDescription')" :id="`${postId}inputtedLongDescription`" placeholder="Полное описание"></textarea>
-    <p v-if="errorInInputtedLongDescription !== overallValues.defaultError" class="error">{{errorInInputtedLongDescription}}</p>
+    <p class="error">{{errorInInputtedLongDescription}}</p>
     <button class="btn" type="submit" :disabled="!!errorInForm">Сохранить</button>
 </form>
 </template>
