@@ -51,7 +51,6 @@ const submit = (): void => {
 <style scoped lang="scss">
 .form {
     width: 100%;
-    margin-bottom: 30px;
 }
 
 .label {

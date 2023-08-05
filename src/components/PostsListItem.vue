@@ -73,16 +73,17 @@ const changePost = () => {
         <button class="btn" @click.stop="toggleIsEdit">{{ isEdit ? 'Отмена' : 'Редактировать' }}</button>
         <button class="btn delete" @click.stop="() => deletePost(post.id)">Удалить</button>
     </div>
-    <div v-if="isEdit" class="formWrapper">
+    <div v-if="isEdit" class="formWrapper" @click.stop="">
         <PostForm 
-        :title="title"
-        :setTitle="setTitle"
-        :smallDescription="smallDescription"
-        :setSmallDescription="setSmallDescription"
-        :longDescription="longDescription"
-        :setLongDescription="setLongDescription"
-        :doIt="changePost"
-    />
+            :postId="post.id"
+            :title="title"
+            :setTitle="setTitle"
+            :smallDescription="smallDescription"
+            :setSmallDescription="setSmallDescription"
+            :longDescription="longDescription"
+            :setLongDescription="setLongDescription"
+            :doIt="changePost"
+        />
     </div>
     <div class="postMain" v-else>
         <h2 class="postTitle">{{ post.title }}</h2>

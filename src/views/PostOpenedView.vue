@@ -43,6 +43,6 @@ const openedPost: PostItem | undefined = postObject[props.postId];
 
 .formWrapper {
     width: 60%;
-    margin: 0 auto;
+    margin: 0 auto 30px;
 }
 </style>

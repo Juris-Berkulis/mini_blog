@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, type Ref } from 'vue';
+import { computed, ref, type Ref } from 'vue';
 
 interface Props {
+    postId?: string,
     title: string,
     smallDescription: string,
     longDescription: string,
@@ -13,9 +14,24 @@ interface Props {
 
 const props = defineProps<Props>();
 
+const overallValues = {
+    maxSizeForTitle: 50,
+    maxSizeForSmallDescription: 100,
+    maxSizeForLongDescription: 255,
+    defaultError: '_',
+};
+
 const inputtedTitle: Ref<string> = ref(props.title);
 const inputtedSmallDescription: Ref<string> = ref(props.smallDescription);
 const inputtedLongDescription: Ref<string> = ref(props.longDescription);
+
+const errorInInputtedTitle: Ref<string> = ref(overallValues.defaultError);
+const errorInInputtedSmallDescription: Ref<string> = ref(overallValues.defaultError);
+const errorInInputtedLongDescription: Ref<string> = ref(overallValues.defaultError);
+
+const errorInForm = computed(() => {
+    return errorInInputtedTitle.value || errorInInputtedSmallDescription.value || errorInInputtedLongDescription.value
+});
 
 const resetForm = (): void => {
     inputtedTitle.value = '';
@@ -24,42 +40,87 @@ const resetForm = (): void => {
 };
 
 const submit = (): void => {
-    props.doIt();
-    resetForm();
+    if (!errorInForm.value) {
+        props.doIt();
+        resetForm();
+    }
+};
+
+type InputName = 'title' | 'smallDescription' | 'longDescription';
+
+const chackIsValidInputValue = (inputName: InputName): void => {
+    switch (inputName) {
+        case 'title': if (!inputtedTitle.value.length) {
+            errorInInputtedTitle.value = 'Обязательное поле';
+        } else if (inputtedTitle.value.length > overallValues.maxSizeForTitle) {
+            errorInInputtedTitle.value = `Максимум ${overallValues.maxSizeForTitle} символов`;
+        } else {
+            errorInInputtedTitle.value = '';
+        } break;
+        case 'smallDescription': if (!inputtedSmallDescription.value.length) {
+            errorInInputtedSmallDescription.value = 'Обязательное поле';
+        } else if (inputtedSmallDescription.value.length > overallValues.maxSizeForSmallDescription) {
+            errorInInputtedSmallDescription.value = `Максимум ${overallValues.maxSizeForSmallDescription} символов`;
+        } else {
+            errorInInputtedSmallDescription.value = '';
+        } break;
+        case 'longDescription': if (inputtedLongDescription.value.length > overallValues.maxSizeForLongDescription) {
+            errorInInputtedLongDescription.value = `Максимум ${overallValues.maxSizeForLongDescription} символов`;
+        } else {
+            errorInInputtedLongDescription.value = '';
+        } break;
+    }
+};
+
+const changeInputValue = (inputName: InputName): void => {
+    chackIsValidInputValue(inputName);
+
+    switch (inputName) {
+        case 'title': props.setTitle(inputtedTitle.value); break;
+        case 'smallDescription': props.setSmallDescription(inputtedSmallDescription.value); break;
+        case 'longDescription': props.setLongDescription(inputtedLongDescription.value); break;
+    }
 };
 </script>
 
 <template>
 <form class="form" @submit.prevent="submit" action="">
-    <label class="label" for="inputtedTitle">Заголовок</label>
-    <input class="input" v-model="inputtedTitle" @change.lazy="() => setTitle(inputtedTitle)" type="text" id="inputtedTitle" placeholder="Заголовок">
-    <label class="label" for="inputtedSmallDescription">Краткое описание</label>
-    <textarea class="textarea" v-model="inputtedSmallDescription" @change.lazy="() => setSmallDescription(inputtedSmallDescription)" id="inputtedSmallDescription" placeholder="Краткое описание"></textarea>
-    <label class="label" for="inputtedLongDescription">Полное описание</label>
-    <textarea class="textarea" v-model="inputtedLongDescription" @change.lazy="() => setLongDescription(inputtedLongDescription)" id="inputtedLongDescription" placeholder="Полное описание"></textarea>
-    <button class="btn" type="submit">Сохранить</button>
+    <label class="label" :for="`${postId}inputtedTitle`">Заголовок</label>
+    <input class="input" v-model.trim="inputtedTitle" @input="() => changeInputValue('title')" type="text" :id="`${postId}inputtedTitle`" placeholder="Заголовок">
+    <p v-if="errorInInputtedTitle !== overallValues.defaultError" class="error">{{ errorInInputtedTitle }}</p>
+    <label class="label" :for="`${postId}inputtedSmallDescription`">Краткое описание</label>
+    <textarea class="textarea" v-model.trim="inputtedSmallDescription" @input="() => changeInputValue('smallDescription')" :id="`${postId}inputtedSmallDescription`" placeholder="Краткое описание"></textarea>
+    <p v-if="errorInInputtedSmallDescription !== overallValues.defaultError" class="error">{{errorInInputtedSmallDescription}}</p>
+    <label class="label" :for="`${postId}inputtedLongDescription`">Полное описание</label>
+    <textarea class="textarea" v-model.trim="inputtedLongDescription" @input="() => changeInputValue('longDescription')" :id="`${postId}inputtedLongDescription`" placeholder="Полное описание"></textarea>
+    <p v-if="errorInInputtedLongDescription !== overallValues.defaultError" class="error">{{errorInInputtedLongDescription}}</p>
+    <button class="btn" type="submit" :disabled="!!errorInForm">Сохранить</button>
 </form>
 </template>
 
 <style scoped lang="scss">
 .form {
     width: 100%;
-    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
 }
 
 .label {
     display: block;
+    margin-top: 15px;
     margin-bottom: 5px;
     font-size: 0.8em;
     line-height: 1;
     color: #333333;
+
+    &:first-child {
+        margin-top: 0;
+    }
 }
 
 .input,
 .textarea {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     padding: 5px;
     border: 2px solid #333333;
     border-radius: 5px;
@@ -81,5 +142,17 @@ const submit = (): void => {
     font-size: 1em;
     font-weight: 400;
     line-height: 1;
+
+    &:disabled {
+        background-color: #dddddd;
+        cursor: not-allowed;
+    }
+}
+
+.error {
+    font-size: 0.6em;
+    font-weight: 400;
+    line-height: 1;
+    color: #cc0000;
 }
 </style>

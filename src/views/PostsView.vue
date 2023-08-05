@@ -59,6 +59,6 @@ const submit = (): void => {
 <style scoped lang="scss">
 .formWrapper {
   width: 60%;
-  margin: 0 auto;
+  margin: 0 auto 30px;
 }
 </style>
