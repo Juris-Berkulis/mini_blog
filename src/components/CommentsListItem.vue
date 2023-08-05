@@ -33,9 +33,15 @@ const {
     padding: 15px;
     border-radius: 15px;
     background-color: #b3ddff;
+    box-shadow: 0 0 3px 3px #000000;
+    transition: all 0.4s linear 0s;
 
     &:last-child {
         margin-bottom: 0;
+    }
+
+    &:hover {
+        box-shadow: 0 0 10px 7px #000000;
     }
 }
 

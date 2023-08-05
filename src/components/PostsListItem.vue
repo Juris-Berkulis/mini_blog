@@ -108,10 +108,12 @@ const changePost = () => {
     font-size: 1em;
     cursor: pointer;
     background-color: #f8e8d5;
+    box-shadow: 0 0 3px 3px #000000;
     transition: all 0.4s linear 0s;
 
     &:hover {
         background-color: #ffe6c7;
+        box-shadow: 0 0 10px 7px #000000;
     }
 }
 
