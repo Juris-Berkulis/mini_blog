@@ -1,9 +1,13 @@
 import type { Comment, CommentsObject } from "@/types";
 import { defineStore } from "pinia";
-import { reactive } from 'vue';
+import { reactive, watch } from 'vue';
 
 export const useCommentsStore = defineStore('comments', () => {
-    const commentsObject: CommentsObject = reactive({});
+    const commentsObject: CommentsObject = reactive(JSON.parse(localStorage.getItem('commentsObject') || '{}'));
+
+    const saveCommentsObjectIntoLocalStorage = (): void => {
+        localStorage.setItem('commentsObject', JSON.stringify(commentsObject));
+    };
 
     const getCommentsForOpenedPost = (openedPostId: string): Array<Comment> => {
         return commentsObject[openedPostId]
@@ -24,6 +28,10 @@ export const useCommentsStore = defineStore('comments', () => {
     const deleteComments = (postId: string): void => {
         delete commentsObject[postId];
     };
+
+    watch(commentsObject, () => {
+        saveCommentsObjectIntoLocalStorage();
+    });
 
     return {
         commentsObject,
