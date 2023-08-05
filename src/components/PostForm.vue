@@ -86,13 +86,32 @@ const changeInputValue = (inputName: InputName): void => {
 <template>
 <form class="form" @submit.prevent="submit" action="">
     <label class="label" :for="`${postId}inputtedTitle`">Заголовок</label>
-    <input class="input" v-model.trim="inputtedTitle" @input="() => changeInputValue('title')" type="text" :id="`${postId}inputtedTitle`" placeholder="Заголовок">
+    <input 
+        class="input" 
+        v-model.trim="inputtedTitle" 
+        @input="() => changeInputValue('title')" 
+        type="text" 
+        :id="`${postId}inputtedTitle`" 
+        placeholder="Заголовок"
+    >
     <p class="error">{{ errorInInputtedTitle }}</p>
     <label class="label" :for="`${postId}inputtedSmallDescription`">Краткое описание</label>
-    <textarea class="textarea" v-model.trim="inputtedSmallDescription" @input="() => changeInputValue('smallDescription')" :id="`${postId}inputtedSmallDescription`" placeholder="Краткое описание"></textarea>
+    <textarea 
+        class="textarea" 
+        v-model.trim="inputtedSmallDescription" 
+        @input="() => changeInputValue('smallDescription')" 
+        :id="`${postId}inputtedSmallDescription`" 
+        placeholder="Краткое описание"
+    ></textarea>
     <p class="error">{{errorInInputtedSmallDescription}}</p>
     <label class="label" :for="`${postId}inputtedLongDescription`">Полное описание</label>
-    <textarea class="textarea" v-model.trim="inputtedLongDescription" @input="() => changeInputValue('longDescription')" :id="`${postId}inputtedLongDescription`" placeholder="Полное описание"></textarea>
+    <textarea 
+        class="textarea" 
+        v-model.trim="inputtedLongDescription" 
+        @input="() => changeInputValue('longDescription')" 
+        :id="`${postId}inputtedLongDescription`" 
+        placeholder="Полное описание"
+    ></textarea>
     <p class="error">{{errorInInputtedLongDescription}}</p>
     <button class="btn" type="submit" :disabled="!!errorInForm">Сохранить</button>
 </form>

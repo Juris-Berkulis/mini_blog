@@ -85,13 +85,33 @@ const chackIsValidInputValue = (inputName: InputName): void => {
 <template>
 <form class="form" @submit.prevent="submit" action="">
     <label class="label" for="authorName">Автор</label>
-    <input class="input" v-model="authorName" @input="() => chackIsValidInputValue('authorName')" type="text" id="authorName" placeholder="Имя">
+    <input 
+        class="input" 
+        v-model="authorName" 
+        @input="() => chackIsValidInputValue('authorName')" 
+        type="text" 
+        id="authorName" 
+        placeholder="Имя"
+    >
     <p class="error">{{ errorInInputtedAuthorName }}</p>
     <label class="label" for="authorEmail">Почта</label>
-    <input class="input" v-model="authorEmail" @input="() => chackIsValidInputValue('authorEmail')" type="text" id="authorEmail" placeholder="Email">
+    <input 
+        class="input" 
+        v-model="authorEmail" 
+        @input="() => chackIsValidInputValue('authorEmail')" 
+        type="text" 
+        id="authorEmail" 
+        placeholder="Email"
+    >
     <p class="error">{{ errorInInputtedAuthorEmail }}</p>
     <label class="label" for="text">Комментарий</label>
-    <textarea class="textarea" v-model="text" @input="() => chackIsValidInputValue('text')" id="text" placeholder="Комментарий"></textarea>
+    <textarea 
+        class="textarea" 
+        v-model="text" 
+        @input="() => chackIsValidInputValue('text')" 
+        id="text" 
+        placeholder="Комментарий"
+    ></textarea>
     <p class="error">{{ errorInInputtedText }}</p>
     <button class="btn" type="submit" :disabled="!!errorInForm">Добавить комментарий</button>
 </form>
