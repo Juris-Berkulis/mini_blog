@@ -17,7 +17,7 @@ const commentsList = getCommentsForOpenedPost(props.postId);
 
 <template>
 <div class="commentsList">
-    <CommentsListItem v-for="comment of commentsList" :key="comment.id" :comment="comment" />
+    <CommentsListItem v-for="comment of commentsList" :key="comment.id" :postId="postId" :comment="comment" />
 </div>
 </template>
 

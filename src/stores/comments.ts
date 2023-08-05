@@ -25,6 +25,11 @@ export const useCommentsStore = defineStore('comments', () => {
         commentsObject[postId].push(comment);
     };
 
+    const deleteComment = (postId: string, commentId: string): void => {
+        const commentIndex: number = commentsObject[postId].findIndex((comment) => comment.id === commentId);
+        commentsObject[postId].splice(commentIndex, 1);
+    };
+
     const deleteComments = (postId: string): void => {
         delete commentsObject[postId];
     };
@@ -39,6 +44,7 @@ export const useCommentsStore = defineStore('comments', () => {
         getCommentsCountForPost,
         addEmptyCommentIntoNewPost,
         addCommentIntoPost,
+        deleteComment,
         deleteComments,
     }
 });
