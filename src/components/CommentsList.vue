@@ -16,8 +16,17 @@ const commentsList = getCommentsForOpenedPost(props.postId);
 </script>
 
 <template>
-<CommentsListItem v-for="comment of commentsList" :key="comment.id" :comment="comment" />
+<div class="commentsList">
+    <CommentsListItem v-for="comment of commentsList" :key="comment.id" :comment="comment" />
+</div>
 </template>
 
 <style scoped lang="scss">
+.commentsList {
+    width: 100%;
+    margin-bottom: 30px;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1;
+}
 </style>

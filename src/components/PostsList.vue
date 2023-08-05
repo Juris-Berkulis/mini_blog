@@ -9,7 +9,7 @@ const {
 </script>
 
 <template>
-<div>
+<div class="postsList">
     <PostsListItem v-for="post of postsList" :key="post.id" :post="post" />
 </div>
 </template>

@@ -21,7 +21,9 @@ const openedPost: PostItem | undefined = postObject[props.postId];
 <template>
 <div v-if="openedPost">
     <OpenedPost :openedPost="openedPost" />
-    <CommentForm :postId="openedPost.id" />
+    <div class="formWrapper">
+        <CommentForm :postId="openedPost.id" />
+    </div>
     <CommentsList :postId="openedPost.id" />
 </div>
 <div v-else>
@@ -32,4 +34,8 @@ const openedPost: PostItem | undefined = postObject[props.postId];
 </template>
 
 <style scoped lang="scss">
+.formWrapper {
+    width: 60%;
+    margin: 0 auto;
+}
 </style>

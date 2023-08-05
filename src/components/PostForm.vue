@@ -30,16 +30,56 @@ const submit = (): void => {
 </script>
 
 <template>
-<form @submit.prevent="submit" action="">
-    <label for="">Заголовок</label>
-    <input v-model="inputtedTitle" @change.lazy="() => setTitle(inputtedTitle)" type="text" name="" id="">
-    <label for="">Краткое описание</label>
-    <textarea v-model="inputtedSmallDescription" @change.lazy="() => setSmallDescription(inputtedSmallDescription)" name="" id="" cols="30" rows="10"></textarea>
-    <label for="">Полное описание</label>
-    <textarea v-model="inputtedLongDescription" @change.lazy="() => setLongDescription(inputtedLongDescription)" name="" id="" cols="30" rows="10"></textarea>
-    <button type="submit">Сохранить</button>
+<form class="form" @submit.prevent="submit" action="">
+    <label class="label" for="inputtedTitle">Заголовок</label>
+    <input class="input" v-model="inputtedTitle" @change.lazy="() => setTitle(inputtedTitle)" type="text" id="inputtedTitle" placeholder="Заголовок">
+    <label class="label" for="inputtedSmallDescription">Краткое описание</label>
+    <textarea class="textarea" v-model="inputtedSmallDescription" @change.lazy="() => setSmallDescription(inputtedSmallDescription)" id="inputtedSmallDescription" placeholder="Краткое описание"></textarea>
+    <label class="label" for="inputtedLongDescription">Полное описание</label>
+    <textarea class="textarea" v-model="inputtedLongDescription" @change.lazy="() => setLongDescription(inputtedLongDescription)" id="inputtedLongDescription" placeholder="Полное описание"></textarea>
+    <button class="btn" type="submit">Сохранить</button>
 </form>
 </template>
 
 <style scoped lang="scss">
+.form {
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.8em;
+    line-height: 1;
+    color: #333333;
+}
+
+.input,
+.textarea {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 2px solid #333333;
+    border-radius: 5px;
+    background-color: #dddddd;
+    transition: all 0.4s linear 0s;
+
+    &:focus {
+        background-color: #cccccc;
+    }
+}
+
+.textarea {
+    height: 100px;
+    width: 100%;
+}
+
+.btn {
+    margin: 0 auto;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1;
+}
 </style>

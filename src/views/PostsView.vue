@@ -42,17 +42,23 @@ const submit = (): void => {
 </script>
 
 <template>
-  <PostForm 
-    :title="title"
-    :setTitle="setTitle"
-    :smallDescription="smallDescription"
-    :setSmallDescription="setSmallDescription"
-    :longDescription="longDescription"
-    :setLongDescription="setLongDescription"
-    :doIt="submit"
-  />
+  <div class="formWrapper">
+    <PostForm 
+      :title="title"
+      :setTitle="setTitle"
+      :smallDescription="smallDescription"
+      :setSmallDescription="setSmallDescription"
+      :longDescription="longDescription"
+      :setLongDescription="setLongDescription"
+      :doIt="submit"
+    />
+  </div>
   <PostsList />
 </template>
 
 <style scoped lang="scss">
+.formWrapper {
+  width: 60%;
+  margin: 0 auto;
+}
 </style>

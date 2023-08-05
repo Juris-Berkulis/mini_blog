@@ -37,16 +37,55 @@ const submit = (): void => {
 </script>
 
 <template>
-<form @submit.prevent="submit" action="">
-    <label for=""></label>
-    <input v-model="authorName" type="text" name="" id="">
-    <label for=""></label>
-    <input v-model="authorEmail" type="text" name="" id="">
-    <label for=""></label>
-    <textarea v-model="text" name="" id="" cols="30" rows="10"></textarea>
-    <button type="submit">Добавить комментарий</button>
+<form class="form" @submit.prevent="submit" action="">
+    <label class="label" for="authorName">Автор</label>
+    <input class="input" v-model="authorName" type="text" id="authorName" placeholder="Имя">
+    <label class="label" for="authorEmail">Почта</label>
+    <input class="input" v-model="authorEmail" type="text" id="authorEmail" placeholder="Email">
+    <label class="label" for="text">Комментарий</label>
+    <textarea class="textarea" v-model="text" id="text" placeholder="Комментарий"></textarea>
+    <button class="btn" type="submit">Добавить комментарий</button>
 </form>
 </template>
 
 <style scoped lang="scss">
+.form {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1em;
+    line-height: 1;
+    color: #333333;
+}
+
+.input,
+.textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 2px solid #333333;
+    border-radius: 5px;
+    background-color: #dddddd;
+    transition: all 0.4s linear 0s;
+
+    &:focus {
+        background-color: #cccccc;
+    }
+}
+
+.textarea {
+    height: 100px;
+    width: 100%;
+}
+
+.btn {
+    margin: 0 auto;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1;
+}
 </style>

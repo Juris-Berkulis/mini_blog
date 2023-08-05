@@ -60,13 +60,14 @@ const changePost = () => {
 </script>
 
 <template>
-<div>
-    <div>
-        <button @click="toggleIsEdit">{{ isEdit ? 'Показать' : 'Редактировать' }}</button>
-        <button @click="() => deletePost(post.id)">Удалить</button>
+<div class="postItem">
+    <div class="btnsPanel">
+        <RouterLink v-if="!isEdit" class="btn link" :to="`/${post.id}`">Открыть пост</RouterLink>
+        <button class="btn" @click="toggleIsEdit">{{ isEdit ? 'Показать' : 'Редактировать' }}</button>
+        <button class="btn delete" @click="() => deletePost(post.id)">Удалить</button>
     </div>
-    <PostForm 
-        v-if="isEdit"
+    <div v-if="isEdit" class="formWrapper">
+        <PostForm 
         :title="title"
         :setTitle="setTitle"
         :smallDescription="smallDescription"
@@ -75,20 +76,106 @@ const changePost = () => {
         :setLongDescription="setLongDescription"
         :doIt="changePost"
     />
-    <div v-else>
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.smallDescription }}</p>
-        <div>
-            <p>
+    </div>
+    <div class="postMain" v-else>
+        <h2 class="postTitle">{{ post.title }}</h2>
+        <p class="postDescription">{{ post.smallDescription }}</p>
+        <div class="postAdditionaly">
+            <p class="postCommentsInfo">
                 <span>Комментарии:</span>
                 <span>{{ getCommentsCountForPost(post.id) }}</span>
             </p>
-            <p>{{ converteDate(post.date) }}</p>
+            <p class="postDate">{{ converteDate(post.date) }}</p>
         </div>
-        <RouterLink :to="`/${post.id}`">Открыть пост</RouterLink>
     </div>
 </div>
 </template>
 
 <style scoped lang="scss">
+.postItem {
+    width: 80%;
+    margin: 0 auto 30px;
+    padding: 8px 15px 15px;
+    border-radius: 15px;
+    font-size: 1em;
+    background-color: #f8e8d5;
+}
+
+.btnsPanel {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    display: flex;
+    justify-content: flex-end;
+    border-bottom: 1px solid #000000;
+}
+
+.link {
+    display: inline-block;
+}
+
+.btn {
+    margin-right: 5px;
+    padding: 0.5em 1em;
+    font-size: 0.6em;
+    font-weight: 400;
+    line-height: 1;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &.delete {
+        background-color: #e40000;
+    }
+
+    &.delete:hover {
+        background-color: #8b0000;
+    }
+}
+
+.formWrapper {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.postMain {
+    width: 100%;
+}
+
+.postTitle {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+}
+
+.postDescription {
+    margin-bottom: 15px;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.15;
+}
+
+.postAdditionaly {
+    display: flex;
+    justify-content: space-between;
+}
+
+.postCommentsInfo {
+    font-size: 0.8em;
+    font-weight: 400;
+    line-height: 1;
+
+    & span:first-child {
+        margin-right: 5px;
+    }
+}
+
+.postDate {
+    font-size: 0.8em;
+    font-weight: 400;
+    line-height: 1;
+    color: #555555;
+}
 </style>
