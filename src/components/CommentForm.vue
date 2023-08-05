@@ -42,7 +42,7 @@ const resetForm = (): void => {
 const submit = (): void => {
     if (!errorInForm.value) {
         const comment: Comment = {
-            id: `comment-${Date.now()}`,
+            id: `c-${Date.now()}`,
             authorName: authorName.value,
             authorEmail: authorEmail.value.toLowerCase(),
             text: text.value,

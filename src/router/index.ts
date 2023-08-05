@@ -10,7 +10,7 @@ const router = createRouter({
       component: PostsView,
     },
     {
-      path: '/:postId',
+      path: '/post/:postId',
       name: 'openedPost',
       component: () => import('../views/PostOpenedView.vue'),
       props: true,

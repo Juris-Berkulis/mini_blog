@@ -68,7 +68,7 @@ const changePost = () => {
 </script>
 
 <template>
-<div class="postItem" @click="router.push(`/${post.id}`)">
+<div class="postItem" @click="router.push(`/post/${post.id}`)">
     <div class="btnsPanel">
         <button class="btn" @click.stop="toggleIsEdit">{{ isEdit ? 'Отмена' : 'Редактировать' }}</button>
         <button class="btn delete" @click.stop="() => deletePost(post.id)">Удалить</button>

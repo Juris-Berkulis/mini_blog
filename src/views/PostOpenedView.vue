@@ -27,7 +27,7 @@ const openedPost: PostItem | undefined = postObject[props.postId];
     </div>
     <CommentsList :postId="openedPost.id" />
 </div>
-<div v-else>
+<div v-else class="postNotFound">
     <h1>404</h1>
     <p>Статья не найдена</p>
     <RouterLink to="/">Вернуться на главную</RouterLink>
@@ -44,5 +44,34 @@ const openedPost: PostItem | undefined = postObject[props.postId];
 .formWrapper {
     width: 60%;
     margin: 0 auto 30px;
+}
+
+.postNotFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & h1 {
+        margin-bottom: 30px;
+        font-size: 4em;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+    }
+
+    & p {
+        margin-bottom: 30px;
+        font-size: 1em;
+        font-weight: 700;
+        line-height: 1.15;
+        text-align: center;
+    }
+
+    & a {
+        display: block;
+        font-size: 1em;
+        font-weight: 400;
+        line-height: 1;
+    }
 }
 </style>
