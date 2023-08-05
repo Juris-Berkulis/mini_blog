@@ -21,6 +21,7 @@ const openedPost: PostItem | undefined = postObject[props.postId];
 <template>
 <div v-if="openedPost">
     <OpenedPost :openedPost="openedPost" />
+    <RouterLink class="toPostsListBtn" to="/">К списку постов</RouterLink>
     <div class="formWrapper">
         <CommentForm :postId="openedPost.id" />
     </div>
@@ -34,6 +35,12 @@ const openedPost: PostItem | undefined = postObject[props.postId];
 </template>
 
 <style scoped lang="scss">
+.toPostsListBtn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 30px;
+}
+
 .formWrapper {
     width: 60%;
     margin: 0 auto;

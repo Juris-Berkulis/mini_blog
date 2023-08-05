@@ -83,6 +83,7 @@ const submit = (): void => {
 }
 
 .btn {
+    display: block;
     margin: 0 auto;
     font-size: 1em;
     font-weight: 400;

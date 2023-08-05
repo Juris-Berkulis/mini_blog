@@ -23,10 +23,6 @@ const {
 
 const isEdit: Ref<boolean> = ref(false);
 
-const toggleIsEdit = (): void => {
-    isEdit.value = !isEdit.value;
-};
-
 const title: Ref<string> = ref(props.post.title);
 const smallDescription: Ref<string> = ref(props.post.smallDescription);
 const longDescription: Ref<string> = ref(props.post.longDescription);
@@ -41,6 +37,17 @@ const setSmallDescription = (value: string): void => {
 
 const setLongDescription = (value: string): void => {
     longDescription.value = value;
+};
+
+const backToDefaultFormValues = (): void => {
+    setTitle(props.post.title);
+    setSmallDescription(props.post.smallDescription);
+    setLongDescription(props.post.longDescription);
+};
+
+const toggleIsEdit = (): void => {
+    isEdit.value = !isEdit.value;
+    backToDefaultFormValues();
 };
 
 const changePost = () => {
@@ -63,7 +70,7 @@ const changePost = () => {
 <div class="postItem">
     <div class="btnsPanel">
         <RouterLink v-if="!isEdit" class="btn link" :to="`/${post.id}`">Открыть пост</RouterLink>
-        <button class="btn" @click="toggleIsEdit">{{ isEdit ? 'Показать' : 'Редактировать' }}</button>
+        <button class="btn" @click="toggleIsEdit">{{ isEdit ? 'Отмена' : 'Редактировать' }}</button>
         <button class="btn delete" @click="() => deletePost(post.id)">Удалить</button>
     </div>
     <div v-if="isEdit" class="formWrapper">
