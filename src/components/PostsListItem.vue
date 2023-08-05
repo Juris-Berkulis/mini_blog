@@ -5,6 +5,7 @@ import { usePostsStore } from '@/stores/posts';
 import { useCommentsStore } from '@/stores/comments';
 import { ref, type Ref } from 'vue';
 import PostForm from './PostForm.vue';
+import router from '@/router';
 
 interface Props {
     post: PostItem,
@@ -67,11 +68,10 @@ const changePost = () => {
 </script>
 
 <template>
-<div class="postItem">
+<div class="postItem" @click="router.push(`/${post.id}`)">
     <div class="btnsPanel">
-        <RouterLink v-if="!isEdit" class="btn link" :to="`/${post.id}`">Открыть пост</RouterLink>
-        <button class="btn" @click="toggleIsEdit">{{ isEdit ? 'Отмена' : 'Редактировать' }}</button>
-        <button class="btn delete" @click="() => deletePost(post.id)">Удалить</button>
+        <button class="btn" @click.stop="toggleIsEdit">{{ isEdit ? 'Отмена' : 'Редактировать' }}</button>
+        <button class="btn delete" @click.stop="() => deletePost(post.id)">Удалить</button>
     </div>
     <div v-if="isEdit" class="formWrapper">
         <PostForm 
@@ -105,7 +105,13 @@ const changePost = () => {
     padding: 8px 15px 15px;
     border-radius: 15px;
     font-size: 1em;
+    cursor: pointer;
     background-color: #f8e8d5;
+    transition: all 0.4s linear 0s;
+
+    &:hover {
+        background-color: #ffe6c7;
+    }
 }
 
 .btnsPanel {
