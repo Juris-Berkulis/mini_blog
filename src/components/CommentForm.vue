@@ -64,7 +64,7 @@ const chackIsValidInputValue = (inputName: InputName): void => {
         } else {
             errorInInputtedAuthorName.value = '';
         } break;
-        case 'authorEmail': if (!overallValues.regExpForAuthorEmail.test(authorEmail.value)) {
+        case 'authorEmail': if (!overallValues.regExpForAuthorEmail.test(authorEmail.value) && authorEmail.value !== '') {
             errorInInputtedAuthorEmail.value = 'Неверный формат почты';
         } else if (authorEmail.value.length > overallValues.maxSizeForAuthorEmail) {
             errorInInputtedAuthorEmail.value = `Максимум ${overallValues.maxSizeForAuthorEmail} символов`;
